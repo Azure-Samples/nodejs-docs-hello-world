@@ -3,7 +3,7 @@ var http = require('http');
 var server = http.createServer(function(request, response) {
 
     response.writeHead(200, {"Content-Type": "text/plain"});
-    response.end("Holy Shit, My CI is working, and now My CD is working too !!!");
+    response.end("How About That?, My CI is working !!!");
 
 });
 
