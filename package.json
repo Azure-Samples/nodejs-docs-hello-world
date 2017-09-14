@@ -9,6 +9,12 @@
         "node": ">=6.9.1"
     },
     "scripts": {
-        "start": "node index.js"
+        "start": "node index.js",
+	"test": "make test"
+    },
+    "devDependencies": {
+        "mocha": "*",
+        "chai": "*",
+        "request": "*"
     }
 }
