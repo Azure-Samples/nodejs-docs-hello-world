@@ -1,3 +1,4 @@
+
 {
     "name": "app-service-hello-world",
     "description": "Simple Hello World Node.js sample for Azure App Service",
@@ -11,4 +12,7 @@
     "scripts": {
         "start": "node index.js"
     }
+      "dependencies": {
+    "express": "^4.16.3"
+  }
 }
