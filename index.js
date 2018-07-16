@@ -7,7 +7,7 @@ var server = http.createServer(function(request, response) {
 
     response.writeHead(200, {"Content-Type": "text/plain"});
         const version = process.version
-        response.write("nodejs version: "
+        response.write("nodejs version: ");
         response.write(version);
         //response.end("Hello World",process.versions);
 
