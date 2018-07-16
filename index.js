@@ -6,7 +6,7 @@ const app = express()
 var server = http.createServer(function(request, response) {
 
     response.writeHead(200, {"Content-Type": "text/plain"});
-        const version = process.env.npm_package_version
+        const version = process.version
         response.write (version);
         response.end("Hello World",process.versions);
 
