@@ -9,7 +9,7 @@ var server = http.createServer(function(request, response) {
         const version = process.version
         response.write("nodejs version: ");
         response.write(version);
-        response.end("",process.versions);
+        response.end("");
 
 });
 
