@@ -1,4 +1,7 @@
 var http = require('http');
+const express = require('express')
+const app = express()
+
 
 var server = http.createServer(function(request, response) {
 
@@ -9,5 +12,9 @@ var server = http.createServer(function(request, response) {
 
 var port = process.env.PORT || 1337;
 server.listen(port);
+app.get('/', function (req, res) {
+    res.send(process.version)
+  })
+
 
 console.log("Server running at http://localhost:%d", port);
