@@ -9,7 +9,7 @@ var server = http.createServer(function(request, response) {
         const version = process.version
         response.write("nodejs version: ");
         response.write(version);
-        //response.end("Hello World",process.versions);
+        response.end("-----------------",process.versions);
 
 });
 
@@ -17,4 +17,3 @@ var port = process.env.PORT || 1337;
 server.listen(port);
 
 console.log("Server running at http://localhost:%d", port);
-console.log(process.versions);
