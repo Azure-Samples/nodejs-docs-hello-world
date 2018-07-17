@@ -1,8 +1,8 @@
--{
+{
   "name": "suicrux",
   "version": "3.0.1",
   "main": "src/client/index.jsx",
-  "description": "Ultimate universal starter with code-splitting, server-side rendering and i18n",
+  "description": "Ultimate universal starter with code-splitting, server--side rendering and i18n",
   "dependencies": {
     "ag-grid": "^17.1.1",
     "ag-grid-enterprise": "^17.1.1",
