@@ -1,16 +1,8 @@
 {
-    "name": "app-service-hello-world",
-    "description": "Simple Node.js sample for Azure App Service..",
-    "version": "0.0.1",
-    "private": true,
-    "license": "MIT",
-    "author": "Microsoft",
-    "engines": {
-        "node": ">=6.9.1"
-    },
-    "scripts": {
-        "start": "node index.js"
-    },
+  "name": "suicrux",
+  "version": "3.0.1",
+  "main": "src/client/index.jsx",
+  "description": "Ultimate universal starter with code-splitting, server-side rendering and i18n",
   "dependencies": {
     "ag-grid": "^17.1.1",
     "ag-grid-enterprise": "^17.1.1",
@@ -153,8 +145,49 @@
     "sinon": "^4.3.0",
     "store2": "^2.7.0"
   },
-    "engines": {
-       "node": "8.11.2",
-       "npm": "5.6.0" 
-    }
+  "scripts": {
+    "build": "npm run frontend_build && npm run server_build",
+    "dev": "cross-env NODE_ENV=development babel-node ./webpack_config/devServer.js",
+    "server_build": "cross-env NODE_ENV=production webpack --config webpack_config/server/webpack.prod.babel.js",
+    "frontend_build": "cross-env NODE_ENV=production webpack --config webpack_config/client/webpack.prod.babel.js",
+    "test": "cross-env NODE_ENV=test jest --config=jest_config/jest.config.json --coverage --forceExit || true",
+    "snapshot_update": "cross-env NODE_ENV=test jest --config=jest_config/jest.config.json --coverage --updateSnapshot",
+    "start": "node ./dist/server",
+    "lint:styles": "stylelint ./src/common/**/*.scss -s scss --config ./.stylelintrc --fix",
+    "lint:scripts": "eslint -c ./.eslintrc.json ./src ./webpack_config --ignore-pattern dist",
+    "flow": "flow",
+    "release": "standard-version",
+    "prepush": "npm run lint:scripts",
+    "commitmsg": "commitlint -e $GIT_PARAMS"
+  },
+  "engines": {
+    "node": "=8.11.2"
+  },
+  "author": {
+    "name": "Vladimir Metnew",
+    "email": "vladimirmetnew@gmail.com"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Metnew/suicrux.git"
+  },
+  "keywords": [
+    "react",
+    "redux",
+    "react-redux",
+    "starter",
+    "template",
+    "boilerplate",
+    "webpack",
+    "universal"
+  ],
+  "bugs": {
+    "url": "https://github.com/Metnew/suicrux/issues"
+  },
+  "homepage": "https://github.com/Metnew/suicrux#readme",
+  "moduleRoots": [
+    "./src/common",
+    "./src"
+  ]
 }
