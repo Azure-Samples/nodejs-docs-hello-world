@@ -12,7 +12,6 @@
         "start": "node index.js"
     },
     "dependencies": {
-       "express": "^4.16.3",
-       "node-sass": "^4.7.2"
+       "express": "^4.16.3"
     }
 }
