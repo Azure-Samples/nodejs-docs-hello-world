@@ -6,13 +6,11 @@ const app = express()
 var server = http.createServer(function(request, response) {
 
     response.writeHead(200, {"Content-Type": "text/plain"});
-        const version = process.version
-        response.write("nodejs version ::: ");
-        response.write(version);
-        //response.write(process.env.MB_API_URL);
+        const version = process.version;
+        var pid = process.pid;
+        var output = "nodejs version = "+ process.version + ", Process Id = " + pid;
+        response.write(output);
         response.end("------");
-        response.write('This process is your pid = ' + process.pid);
-
 });
 
 var port = process.env.PORT || 1337;
