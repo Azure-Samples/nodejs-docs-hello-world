@@ -10,7 +10,8 @@ var server = http.createServer(function(request, response) {
         response.write("nodejs version ::: ");
         response.write(version);
         //response.write(process.env.MB_API_URL);
-        response.end("");
+        response.end("------");
+        response.write('This process is your pid = ' + process.pid);
 
 });
 
