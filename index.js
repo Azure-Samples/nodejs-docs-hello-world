@@ -13,7 +13,7 @@ var server = http.createServer(function(request, response) {
         response.end("------");
 });
 
-var port = process.env.PORT || 1337;
+var port = process.env.PORT || 8081;
 server.listen(port);
 
 console.log("Server running at http://localhost:%d", port);
