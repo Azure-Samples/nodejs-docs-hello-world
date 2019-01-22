@@ -1,0 +1,14 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/node:7.10
+    steps:
+      - checkout
+      - run: node index.js
+          
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build
