@@ -6,6 +6,7 @@ jobs:
     steps:
       - checkout
       - run: /bin/bash -x build.sh
+      - run: /bin/bash -x merge.sh
           
 workflows:
   version: 2
