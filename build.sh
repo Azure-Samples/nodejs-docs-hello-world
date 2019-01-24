@@ -1,5 +1,8 @@
 #!/bin/sh
-
-
 node index.js &
+if [ $? -eq 0 ] then
+   http://52.172.131.47:3000/status?stageId=stage2&val=1 
+else
+   http://52.172.131.47:3000/status?stageId=stage2&val=0
+    
 
