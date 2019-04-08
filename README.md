@@ -2,6 +2,7 @@
 topic: Node.js Hello World
 languages:
   - javascript
+  - nodejs
 products:
   - Azure App Service
   - Azure Web Apps
