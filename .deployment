@@ -1,0 +1,3 @@
+[config]
+
+command = bash deploy.sh
