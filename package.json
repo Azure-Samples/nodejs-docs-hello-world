@@ -12,7 +12,7 @@
         "start": "node index.js"
     },
     "dependencies": {
-        "express": "^4.16.3"
+                "express": "^4.16.3",
 		"@babel/core": "^7.2.2",
 		"@digitalspaces/syncho": "^2.0.12",
 		"@google-cloud/speech": "2.1",
