@@ -112,7 +112,7 @@ selectNodeVersion
 # 3. Install NPM packages
 if [ -e "$DEPLOYMENT_TARGET/package.json" ]; then
   cd "$DEPLOYMENT_TARGET"
-  NPM_CMD="/opt/nodejs/10.1.0/bin/npm"
+  NPM_CMD="/opt/nodejs/10.14.1/bin/npm"
   echo "performing npm install"
   echo "versions used : "
   npm -v
