@@ -113,7 +113,7 @@ selectNodeVersion
 if [ -e "$DEPLOYMENT_TARGET/package.json" ]; then
   cd "$DEPLOYMENT_TARGET"
   echo "performing npm install"
-  eval $NPM_CMD install --production
+  eval $NPM_CMD install --verbose --production
   # eval $NPM_CMD install --only=dev
   exitWithMessageOnError "npm failed"
   cd - > /dev/null
