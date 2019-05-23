@@ -4,7 +4,8 @@ const app = express()
 
 
 var server = http.createServer(function(request, response) {
-    
+    response.setHeader('Connection', 'Transfer-Encoding');
+    response.setHeader('Content-Type', 'text/html; charset=utf-8');
     response.setHeader('Transfer-Encoding', 'chunked');
     response.useChunkedEncodingByDefault = true;
     response.writeHead(200, {"Content-Type": "text/plain"});
