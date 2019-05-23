@@ -4,9 +4,11 @@ const app = express()
 
 
 var server = http.createServer(function(request, response) {
-
-    response.writeHead(200, {"Content-Type": "text/plain"});
+    
     response.setHeader('Transfer-Encoding', 'chunked');
+    response.useChunkedEncodingByDefault = true;
+    response.writeHead(200, {"Content-Type": "text/plain"});
+    
     sponse.useChunkedEncodingByDefault = true;     const version = process.version;
         var pid = process.pid;
         //const argv = require('yargs').argv
