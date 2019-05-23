@@ -1,24 +1,19 @@
-var http = require('http');
 const express = require('express')
+
 const app = express()
+ 
 
+var port = process.env.port || 8081;
+ 
 
-var server = http.createServer(function(request, response) {
+app.get('/', function (req, res) {
 
-    response.writeHead(200, {"Content-Type": "text/plain"});
-    response.header('Transfer-Encoding', 'chunked');
-    response.useChunkedEncodingByDefault = true;
-        const version = process.version;
-        var pid = process.pid;
-        //const argv = require('yargs').argv
+ res.header('Transfer-Encoding', 'chunked');
 
-        //var output = "nodejs version = "+ process.version + ", Process Id = " + pid + ", mongourl = "+ argv.mongourl;
-        var output = "nodejs version = "+ process.version + ", Process Id = " + pid;
-        response.write(output);
-        response.end("---dev2---------");
-});
+ res.useChunkedEncodingByDefault = true;
 
-var port = process.env.PORT || 8081;
-server.listen(port);
+ res.send(process.version)
 
-console.log("Server running at http://localhost:%d", port);
+ });
+
+app.listen(port, () => console.log('Example app listening on port 8081!'))
