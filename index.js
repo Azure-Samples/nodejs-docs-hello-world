@@ -8,7 +8,7 @@ var port = process.env.port || 8081;
 
 app.get('/', function (req, res) {
 
- res.header('Transfer-Encoding', 'chunked');
+ res.setHeader('Transfer-Encoding', 'chunked');
 
  res.useChunkedEncodingByDefault = true;
 
