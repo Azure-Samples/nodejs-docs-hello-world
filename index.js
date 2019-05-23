@@ -8,7 +8,7 @@ var server = http.createServer(function(request, response) {
     response.writeHead(200, {"Content-Type": "text/plain"});
         const version = process.version;
         var pid = process.pid;
-        const argv = require('yargs').argv
+        //const argv = require('yargs').argv
 
         //var output = "nodejs version = "+ process.version + ", Process Id = " + pid + ", mongourl = "+ argv.mongourl;
         var output = "nodejs version = "+ process.version + ", Process Id = " + pid;
