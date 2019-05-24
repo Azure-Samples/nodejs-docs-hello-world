@@ -1,6 +1,8 @@
 var http = require('http');
 const express = require('express')
 const app = express()
+var fs = require('fs');
+var path = require('path');
 
 
 var server = http.createServer(function(request, response) {
@@ -17,7 +19,7 @@ var server = http.createServer(function(request, response) {
 
         //var output = "nodejs version = "+ process.version + ", Process Id = " + pid + ", mongourl = "+ argv.mongourl;
         var output = "nodejs version = "+ process.version + ", Process Id = " + pid;
-        response.sendFile('sample23kb.txt');
+        fs.createReadStream(path.resolve(__dirname, 'sample23kb.txt')).pipe(res);
         //response.write(output);
         //response.end("---dev2---------");
 });
