@@ -19,7 +19,7 @@ var server = http.createServer(function(request, response) {
 
         //var output = "nodejs version = "+ process.version + ", Process Id = " + pid + ", mongourl = "+ argv.mongourl;
         var output = "nodejs version = "+ process.version + ", Process Id = " + pid;
-        fs.createReadStream(path.resolve(__dirname, 'sample23kb.txt')).pipe(res);
+        fs.createReadStream(path.resolve(__dirname, 'sample23kb.txt')).pipe(response);
         //response.write(output);
         //response.end("---dev2---------");
 });
