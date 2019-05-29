@@ -112,13 +112,14 @@ selectNodeVersion
 # 3. Install NPM packages
 if [ -e "$DEPLOYMENT_TARGET/package.json" ]; then
   cd "$DEPLOYMENT_TARGET"
-  NPM_CMD="/opt/nodejs/8.11.2/bin/npm"
+  # NPM_CMD="/opt/nodejs/10.10.0/bin/npm"
   echo "performing npm install"
   echo "versions used : "
   npm -v
   node -v
   echo "--------------------------------------"
   eval $NPM_CMD install --verbose --production
+  eval $NPM_CMD run setup
   # eval $NPM_CMD install --only=dev
   exitWithMessageOnError "npm failed"
   cd - > /dev/null
