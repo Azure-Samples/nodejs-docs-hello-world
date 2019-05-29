@@ -1,0 +1,42 @@
+/* Import */
+@import '../../styles/variables/variables';
+.content { /* stylelint-ignore */
+  background:  $content-background;
+  min-height:  calc(100vh - #{$header-height});
+  width:       calc(100vw - #{$left-menu-width});
+  margin-top:  $header-height;
+  margin-left: $left-menu-width;
+
+  div[class^="adminsearch___"] {
+    //position: static;
+  }
+  div[class^="adminwrapper___"] {
+    //position: static;
+    //width:    auto;
+  }
+  //div[class*="admincontainerFluid___"] {
+  //  padding: 10px;
+  //}
+  div[class^="adminmain_wrapper___"] {
+    padding:    0;
+    box-shadow: none;
+    background: transparent;
+  }
+  div[class^="adminsub_wrapper___"] {
+    padding:    0;
+    box-shadow: none;
+    background: transparent;
+  }
+  div[class*="BackHeader-styles"] {
+    top:         60px;
+    left:        $left-menu-width;
+    height:      3.5rem;
+    width:       3.5rem;
+    line-height: 3.5rem;
+  }
+}
+.wrapper { /* stylelint-ignore */
+  background: $content-background;
+  min-height: 100%;
+  width:      100%;
+}

@@ -1,0 +1,40 @@
+/* Import */
+@import '../../styles/variables/variables';
+.adminPage { /* stylelint-disable */
+  display:    flex;
+  overflow-x: hidden;
+
+  div[class^="container-fluid"] {
+    padding-top: 40px;
+  }
+  //div[class^="container"] {
+  div[class*="admintgHome"] {
+    max-width:      100%;
+    transition:     .5s all;
+    padding-bottom: 20px;
+  }
+}
+.adminPageRightWrapper {
+  width:      100%;
+  transition: .5s all;
+
+  div[class^="admincontent__"] {
+    transition: .5s all;
+  }
+
+  &:not(.adminPageRightWrapper__leftMenu__isOpen) {
+    div[class^="admincontent__"] {
+      width:       100%;
+      margin-left: 0;
+    }
+  }
+}
+.adminPageRightWrapper__leftMenu__isOpen {
+  width: calc(100% - #{$left-menu-width});
+}
+.adminPageSeparator {
+  height:          6rem;
+  display:         flex;
+  flex-direction:  column;
+  justify-content: center;
+}

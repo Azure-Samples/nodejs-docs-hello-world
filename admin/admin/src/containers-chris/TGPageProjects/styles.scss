@@ -1,0 +1,32 @@
+/* Import */
+@import '../../styles/variables/variables';
+.tgHome {
+  padding: 0;
+}
+.containerFluid {
+  padding: 47px 13px 0 13px;
+  > div {
+    margin: 0;
+  }
+}
+.tgTable {
+  //border: 1px solid rgba(0,0,0,.5);
+}
+.tgTable__title {
+  font-weight:   bold;
+  margin-bottom: 5px;
+  margin-left:   15px;
+}
+.tgTable__table {
+  //padding: 5px;
+
+}
+.tgTable__tableRow {
+  background:    white;
+  border-bottom: 1px solid #ddd;
+  padding:       5px 0;
+
+  &:last-child {
+    border: none;
+  }
+}

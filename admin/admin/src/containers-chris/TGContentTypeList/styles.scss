@@ -1,0 +1,13 @@
+.tgContentTypeList {
+  table[class*="admintable__"] {
+
+    td, th {
+      &:first-child {
+        display: none;
+      }
+      &:last-child {
+        display: none;
+      }
+    }
+  }
+}

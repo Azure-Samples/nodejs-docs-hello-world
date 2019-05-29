@@ -1,0 +1,65 @@
+/* Import */
+@import '../../styles/variables/variables';
+.tgHeader {
+}
+.tgHeader__tab {
+  display:     inline-block;
+  padding:     18px 20px 0;
+  color:       rgba(255, 255, 255, .65);
+  font-weight: bold;
+  height:      100%;
+  border-left: 0.3rem solid transparent;
+  transition:  .2s all;
+
+  &:hover {
+    color:           #ffffff;
+    background:      #1C2431;
+    border-left:     0.3rem solid #0097f7;
+    text-decoration: none;
+    cursor:          pointer;
+  }
+}
+.tgHeader__tabIsOpen {
+  background-color: #0097f7 !important;
+}
+.tgHeader__tabLogo {
+  color:       rgba(255, 255, 255, .65);
+  font-weight: bold;
+  font-size:   19px;
+  margin-top:  -3px;
+  width:       24rem;
+
+  &:hover {
+    background: #0097f7;
+  }
+}
+.tgHeader__tabsContainer {
+  height: 100%;
+}
+.tgHeader__tabsList {
+  list-style: none;
+  display:    flex;
+  background: #18202E;
+  height:     100%;
+  padding:    0;
+}
+.tgHeader__tabsListItem {
+  height: 100%;
+  margin: 0 !important;
+}
+.tgHeader__leftMenuToggle {
+  position:       absolute;
+  left:           0;
+  top:            100%;
+  width:          $left-menu-width;
+  background:     #18202E;
+  padding:        1rem 1.6rem 1rem 2rem;
+  margin-bottom:  .8rem;
+  color:          #5b626f;
+  text-transform: uppercase;
+  font-size:      1.1rem;
+  letter-spacing: .1rem;
+  font-weight:    800;
+  opacity:        1;
+  cursor:         pointer;
+}
