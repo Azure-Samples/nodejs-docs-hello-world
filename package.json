@@ -23,8 +23,7 @@
     "lodash": "^4.17.5",
     "strapi": "^3.0.0-alpha.24.1",
     "strapi-hook-mongoose": "3.0.0-alpha.24.1"
-  }
-  ],
+  },
   "strapi": {
     "packageManager": "npm",
     "uuid": "a38c197f-7d27-4be4-bc92-b26aacc02804"
