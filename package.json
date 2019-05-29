@@ -5,7 +5,7 @@
   "description": "A Strapi application.",
   "main": "./index.js",
   "scripts": {
-    "setup": "cd admin && npm run setup",
+    "setup": "npm run setup",
     "start": "node index.js",
     "strapi": "node_modules/strapi/bin/strapi.js",
     "lint": "node_modules/.bin/eslint api/**/*.js config/**/*.js plugins/**/*.js",
