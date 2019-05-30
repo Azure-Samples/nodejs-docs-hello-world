@@ -118,8 +118,10 @@ if [ -e "$DEPLOYMENT_TARGET/package.json" ]; then
   npm -v
   node -v
   echo "--------------------------------------"
-  eval $NPM_CMD install --verbose --production
   eval $NPM_CMD install strapi@3.0.0-alpha.24.1 -g
+  echo "running install"
+  eval $NPM_CMD install --verbose --production
+  echo "running setup"
   eval $NPM_CMD run setup
   # eval $NPM_CMD install --only=dev
   exitWithMessageOnError "npm failed"
