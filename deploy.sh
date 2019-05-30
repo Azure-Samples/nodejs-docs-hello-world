@@ -118,12 +118,14 @@ if [ -e "$DEPLOYMENT_TARGET/package.json" ]; then
   echo "versions used : "
   npm -v
   node -v
-  echo "--------------------------------------"
+  echo "----------------running strapi install----------------------"
   eval $NPM_CMD install strapi@3.0.0-alpha.24.1
-  echo "running install"
-  eval $NPM_CMD install --verbose --production
-  echo "running setup"
+  echo "running install========================================="
+  eval $NPM_CMD install --verbose --unsafe-perm
+  echo "running setup=========================================="
   eval $NPM_CMD run setup
+  echo "running plugins========================================="
+  eval $NPM_CMD run setup --plugins
   # eval $NPM_CMD install --only=dev
   exitWithMessageOnError "npm failed"
   cd - > /dev/null
