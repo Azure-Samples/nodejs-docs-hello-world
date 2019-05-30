@@ -116,8 +116,8 @@ if [ -e "$DEPLOYMENT_TARGET/package.json" ]; then
   NPM_CMD="/opt/nodejs/10.10.0/bin/npm"
   echo "performing npm install"
   echo "versions used : "
-  $NPM_CMD -v
-  $NODE_EXE -v
+  #$NPM_CMD -v
+  #$NODE_EXE -v
   echo "----------------running strapi install----------------------"
   eval $NPM_CMD install strapi@3.0.0-alpha.24.1
   echo "running install========================================="
