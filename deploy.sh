@@ -124,7 +124,7 @@ if [ -e "$DEPLOYMENT_TARGET/package.json" ]; then
   eval $NPM_CMD install --verbose --unsafe-perm
   echo "running setup=========================================="
   eval $NPM_CMD run setup
-  echo "running plugins========================================="
+  echo "running plugins=========================================--"
   eval $NPM_CMD run setup --plugins
   # eval $NPM_CMD install --only=dev
   exitWithMessageOnError "npm failed"
