@@ -1,11 +1,12 @@
 ---
-topic: Node.js Hello World
+page_type: sample
 languages:
-  - javascript
-  - nodejs
+- nodejs
+- javascript
 products:
-  - Azure App Service
-  - Azure Web Apps
+- azure
+- azure-app-service
+description: "This sample demonstrates a tiny Hello World Node.js app for Azure App Service."
 ---
 
 # Node.js Hello World
