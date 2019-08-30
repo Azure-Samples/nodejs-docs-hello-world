@@ -48,23 +48,41 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
           
-  build-and-deploy:
+  # build-and-deploy:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #   # checkout the repo
+  #   - uses: actions/checkout@master
+    
+  #   # install dependencies, build, and test
+  #   - name: npm install, build, and test
+  #     run: |
+  #       npm install
+  #       npm run build --if-present
+  #       npm run test --if-present
+        
+  #   # deploy web app using publish profile credentials
+  #   - uses: azure/appservice-actions/webapp@master
+  #     with: 
+  #       app-name: node-rn
+  #       publish-profile: ${{ secrets.azureWebAppPublishProfile }}
+        
+  deploy-to-sandbox:
+    needs: publish-gpr
     runs-on: ubuntu-latest
     steps:
     # checkout the repo
-    - uses: actions/checkout@master
+    - uses: davidmatousek/nodejs-docs-hello-world
     
     # install dependencies, build, and test
-    - name: npm install, build, and test
-      run: |
-        npm install
-        npm run build --if-present
-        npm run test --if-present
+    #- name: npm install, build, and test
+    #  run: |
+    #    npm install
+    #    npm run build --if-present
+    #    npm run test --if-present
         
     # deploy web app using publish profile credentials
     - uses: azure/appservice-actions/webapp@master
       with: 
         app-name: node-rn
         publish-profile: ${{ secrets.azureWebAppPublishProfile }}
-        
-
