@@ -72,7 +72,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     # checkout the repo
-    - uses: davidmatousek/nodejs-docs-hello-world
+    - uses: davidmatousek/nodejs-docs-hello-world@0.0.8
     
     # install dependencies, build, and test
     #- name: npm install, build, and test
