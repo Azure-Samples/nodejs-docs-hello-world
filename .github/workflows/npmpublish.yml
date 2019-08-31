@@ -44,8 +44,11 @@ jobs:
           node-version: 12
           registry-url: https://npm.pkg.github.com/
           scope: '@davidmatousek'
+      #Checks out code from repository
       - run: git config --global user.email "davidmatousek@me.com" && git config --global user.name "NPM BOT"
+      #Runs npm version that updates the package.json file the the new version
       - run: npm version patch
+      #pushes the changes back into the repository
       - run: git push "https://x-access-token:$GITHUB_TOKEN@github.com/$GITHUB_REPOSITORY" HEAD:master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
