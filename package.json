@@ -1,7 +1,7 @@
 {
     "name": "@davidmatousek/nodejs-docs-hello-world",
     "description": "Simple Hello World Node.js sample for Azure App Service",
-    "version": "0.0.12",
+    "version": "0.0.13",
     "private": false,
     "license": "MIT",
     "author": "Microsoft",
