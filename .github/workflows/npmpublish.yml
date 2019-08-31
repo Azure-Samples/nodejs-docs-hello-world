@@ -58,7 +58,6 @@ jobs:
     - name: npm install, build, and test
       run: |
         npm install
-        npm version patch -m "Upgrade to %s for reasons"
         npm run build --if-present
         npm run test --if-present
         
