@@ -1,7 +1,7 @@
 {
     "name": "@davidmatousek/nodejs-docs-hello-world",
     "description": "Just can't test enough",
-    "version": "0.0.26",
+    "version": "0.0.27",
     "private": false,
     "license": "MIT",
     "author": "Microsoft",
