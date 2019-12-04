@@ -1,0 +1,96 @@
+name: Node.js Package
+
+on:
+  pull_request:
+    branches:
+      - master
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      #- name: ESLint checks
+      #  uses = "stefanoeb/eslint-action@master"
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12
+      - run: npm ci
+      - run: npm test
+
+  #publish-npm:
+  #  needs: build
+  #  runs-on: ubuntu-latest
+  #  steps:
+  #    - uses: actions/checkout@v1
+  #    - uses: actions/setup-node@v1
+  #      with:
+  #        node-version: 12
+  #        registry-url: https://registry.npmjs.org/
+  #    - run: npm publish
+  #      env:
+  #        NODE_AUTH_TOKEN: ${{secrets.npm_token}}
+
+  publish-gpr:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12
+          registry-url: https://npm.pkg.github.com/
+          scope: '@davidmatousek'
+      #Checks out code from repository
+      - run: git config --global user.email "davidmatousek@me.com" && git config --global user.name "NPM BOT"
+      #Runs npm version that updates the package.json file the the new version
+      - run: npm version patch
+      #pushes the changes back into the repository
+      - run: git push "https://x-access-token:$GITHUB_TOKEN@github.com/$GITHUB_REPOSITORY" HEAD:master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+    # checkout the repo
+    - uses: actions/checkout@master
+    
+    # install dependencies, build, and test
+    - name: npm install, build, and test
+      run: |
+        npm install
+        npm run build --if-present
+        npm run test --if-present
+        
+    # deploy web app using publish profile credentials
+    - uses: azure/appservice-actions/webapp@master
+      with: 
+        app-name: node-rn
+        publish-profile: ${{ secrets.azureWebAppPublishProfile }}
+        
+  # deploy-to-sandbox:
+  #   needs: publish-gpr
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #   # checkout the repo
+  #   - uses: davidmatousek/nodejs-docs-hello-world@0.0.8
+    
+  #   # install dependencies, build, and test
+  #   #- name: npm install, build, and test
+  #   #  run: |
+  #   #    npm install
+  #   #    npm run build --if-present
+  #   #    npm run test --if-present
+        
+  #   # deploy web app using publish profile credentials
+  #   - uses: azure/appservice-actions/webapp@master
+  #     with: 
+  #       app-name: node-rn
+  #       publish-profile: ${{ secrets.azureWebAppPublishProfile }}
