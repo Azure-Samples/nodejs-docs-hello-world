@@ -9,7 +9,7 @@ const nightmare = Nightmare({
     gotoTimeout: 120000,
     waitTimeout: 120000,
   });
-const pathToPdfFile = path.resolve('/home/site/wwwroot/test.pdf');
+const pathToPdfFile = path.resolve('test.pdf');
 
 
 var server = http.createServer(function(request, response) {
@@ -21,7 +21,7 @@ var server = http.createServer(function(request, response) {
 
         //response.end("---dev2---------");
         nightmare
-           .goto(`https://www.yahoo.com`)
+           .goto(`http://www.google.com`)
           //.wait('.nightmare-loaded-indicator')
           .pdf(pathToPdfFile)
           .end()
@@ -31,7 +31,7 @@ var server = http.createServer(function(request, response) {
         .catch((error) => {
            console.error('Render failed: ', error)
         });
-        var output = "nodejs version = "+ process.version + ", Process Id = " + pid;
+        var output = "nodejs version = "+ process.version + ", Process Id == " + pid;
         response.write(output);
 });
 
