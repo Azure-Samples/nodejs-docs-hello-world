@@ -2,7 +2,6 @@ var http = require('http');
 const express = require('express')
 const app = express()
 var fs = require('fs');
-var path = require('path');
 const Nightmare = require('nightmare');
 const path = require('path');
 const nightmare = Nightmare({
