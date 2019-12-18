@@ -3,7 +3,7 @@ const express = require('express')
 const app = express()
 var fs = require('fs');
 const Nightmare = require('nightmare');
-const path = require('path');
+var path = require('path');
 const nightmare = Nightmare({
     show: false,
     gotoTimeout: 120000,
