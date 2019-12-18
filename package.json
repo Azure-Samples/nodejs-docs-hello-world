@@ -10,6 +10,7 @@
   "license": "mibelhe",
   "dependencies": {
     "nightmare": "^3.0.0",
-    "path": "0.12.7"
+    "path": "0.12.7",
+    "express": "^4.16.3"
   }
 }
