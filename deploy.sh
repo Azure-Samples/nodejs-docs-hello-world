@@ -113,20 +113,13 @@ selectNodeVersion
 # 3. Install NPM packages
 if [ -e "$DEPLOYMENT_TARGET/package.json" ]; then
   cd "$DEPLOYMENT_TARGET"
-  NPM_CMD="/opt/nodejs/10.1.0/bin/npm"
+  # NPM_CMD="/opt/nodejs/10.1.0/bin/npm"
   echo "performing npm install"
   echo "versions used : "
   $NPM_CMD -v
   $NODE_EXE -v
-  echo "----------------running strapi install----------------------"
-  eval $NPM_CMD install strapi@3.0.0-alpha.24.1
   echo "running install========================================="
-  eval $NPM_CMD install --verbose --unsafe-perm
-  echo "running setup=========================================="
-  eval $NPM_CMD run setup
-  echo "running plugins=========================================--"
-  eval $NPM_CMD run setup --plugins
-  # eval $NPM_CMD install --only=dev
+  eval $NPM_CMD install
   exitWithMessageOnError "npm failed"
   cd - > /dev/null
 fi
