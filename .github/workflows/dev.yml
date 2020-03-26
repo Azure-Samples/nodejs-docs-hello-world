@@ -8,10 +8,7 @@
 #
 # For more information on GitHub Actions for Azure, refer to https://github.com/Azure/Actions
 # For more samples to get started with GitHub Action workflows to deploy to Azure, refer to https://github.com/Azure/actions-workflow-samples
-on:
-  push:
-    branches:
-      - master
+on: [pull_request]
 
 env:
   AZURE_WEBAPP_NAME: node-helloworld    # set this to your application's name
