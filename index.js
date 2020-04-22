@@ -20,6 +20,6 @@ let app = express();
 
 app.use(bodyParser.json());
 
-app.use("/products",ProductsRouters);
+app.use("/",ProductsRouters);
 
-app.listen(3000);
+app.listen(3000, ()=> console.log("Express server running on port:3000"));
