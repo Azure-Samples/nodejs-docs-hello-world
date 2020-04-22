@@ -9,7 +9,8 @@ Router.get("/", (req,res) => {
         } else {
             console.log(err);
         }
-   })
+   });
+   
 });
 
 module.exports = Router;
