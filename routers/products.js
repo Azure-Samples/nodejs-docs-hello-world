@@ -6,11 +6,23 @@ Router.get("/products", (req,res) => {
    mySqlConnection.query("select * from supermarket.product limit 10;", (err,rows,fields)=> {
         if(!err) {
             res.send(rows);
+            
         } else {
             console.log(err);
         }
    });
    
 });
+
+Router.get("/categories", (req,res) => {
+    mySqlConnection.query("select * from supermarket.category;", (err,rows,fields)=> {
+         if(!err) {
+             res.send(rows);
+         } else {
+             console.log(err);
+         }
+    });
+    
+ });
 
 module.exports = Router;
