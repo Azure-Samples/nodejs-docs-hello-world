@@ -1,0 +1,8 @@
+{
+    "appService.zipIgnorePattern": [
+        "node_modules{,/**}",
+        ".vscode{,/**}"
+    ],
+    "appService.defaultWebAppToDeploy": "/subscriptions/ee1a822e-af17-4884-bfcc-8a8fa5b21cae/resourceGroups/ProepBackend/providers/Microsoft.Web/sites/BackendForProep",
+    "appService.deploySubpath": ""
+}
