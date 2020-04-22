@@ -8,7 +8,7 @@
 // const port = process.env.PORT || 1337;
 // server.listen(port);
 
-// console.log("Server running at http://localhost:%d", port);
+    // console.log("Server running at http://localhost:%d", port);
 
 
 
@@ -22,4 +22,7 @@ app.use(bodyParser.json());
 
 app.use("/",ProductsRouters);
 
-app.listen(3000, ()=> console.log("Express server running on port:3000"));
+const port = process.env.PORT || 1337;
+app.listen(port, ()=> console.log("Express server running on port:3000"));
+
+console.log("Server running at http://localhost:%d", port);
