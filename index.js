@@ -23,6 +23,6 @@ app.use(bodyParser.json());
 app.use("/",ProductsRouters);
 
 const port = process.env.PORT || 1337;
-app.listen(port, ()=> console.log("Express server running on port:3000"));
+app.listen(port, ()=> console.log("Express server running on port:"+port));
 
 console.log("Server running at http://localhost:%d", port);
