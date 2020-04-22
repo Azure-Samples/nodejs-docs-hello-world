@@ -1,10 +1,4 @@
----
-languages:
-- nodejs
-- javascript
-products:
-- azure
-- azure-app-service
+Backend for PROEP project
 
 
 ## Contributing
