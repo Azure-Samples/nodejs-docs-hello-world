@@ -8,7 +8,7 @@ RUN npm cache clean -f
 RUN npm install -g n
 RUN n stable
 
-ADD .
+ADD . . 
 RUN npm -i
 
 EXPOSE 1337
