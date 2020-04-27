@@ -1,85 +1,61 @@
 const express = require("express");
 const Router = express.Router();
 const bcrypt = require('bcrypt');
-const mySqlConnection = require("../config/database");
+const inhouseDB = require("../config/inhouseDBConnection");
 const jwt = require('jsonwebtoken');
 
 
 let secret = "secret"
-// Router.get("/products", (req,res) => {
-//    mySqlConnection.query("select * from supermarket.product limit 10;", (err,rows,fields)=> {
-//         if(!err) {
-//             res.send(rows);
-
-//         } else {
-//             console.log(err);
-//         }
-//    });
-
-// });
-
-// Router.get("/categories", (req,res) => {
-//     mySqlConnection.query("select * from supermarket.category;", (err,rows,fields)=> {
-//          if(!err) {
-//              res.send(rows);
-//          } else {
-//              console.log(err);
-//          }
-//     });
-
-//  });
-
-
 
 Router.post('/register', async (req, res) => {
+        let name = req.body.name;
+        let email = req.body.email;
+        let password = req.body.password
+        if (ValidateEmail(email)) {
+                
+                let hashedPassword = await bcrypt.hash(password, 10);
 
-        if (ValidateEmail(req.body.email)) {
-                console.log("Registering....Email is valid");
+                console.log("/register....Email is valid");
+                console.log("/register....Password: " + password);
+                console.log("/register....HashedPassword: " + hashedPassword);
 
-                let hashedPassword = await bcrypt.hash(req.body.password, 10);
-
-                console.log(req.body.password);
-                console.log(hashedPassword);
-
-
-                mySqlConnection.query(`select * from inhouse.users where email = "${req.body.email}" `, (err, rows, fields) => {
+                inhouseDB.query(`select * from inhouse.user where email = "${email}"`, (err, rows, fields) => {
                         if (!err) {
                                 if (rows[0]) {
-                                        return res.status(400).send("Email already exists");
+                                        return res.status(400).send("The email already exists");
                                 } else {
                                         ///Create account
-                                        mySqlConnection.query(
-                                                ` INSERT INTO inhouse.users (name, email, password, role, houseid) VALUES ("${req.body.name}","${req.body.email}","${hashedPassword}",${req.body.role},${req.body.houseid})`, (err, rows, fields) => {
+                                        inhouseDB.query(
+                                                `INSERT INTO inhouse.user (name, email, password) VALUES ("${name}","${email}","${hashedPassword}")`, (err, rows, fields) => {
                                                         if (!err) {
-                                                                console.log("No error");
+                                                                console.log("/register....Succesfull");
+                                                                return res.status(201).send("Account has been created");
                                                         } else {
-                                                                console.log(err);
+                                                                console.log("/register....DB_INSERT-error: " + err);
+                                                                return res.status(500).send("Internal Server Error")
                                                         }
                                                 })
-
                                 }
-                                //res.send(rows);
                         } else {
-                                console.log(err);
+                                console.log("/register....DB_SELECT-error: " + err);
+                                return res.status(500).send("Internal Server Error")
                         }
                 });
-
-                res.status(201).send("Account has been created");
         } else {
-                console.log("Email is not valid");
-                res.status(400).send("Email is not valid");
+                console.log("/register....Email is not valid");
+                return res.status(400).send("The email is not valid");
         }
 })
 
 
 Router.post('/login', async (req, res) => {
 
-        let user = mySqlConnection.query(`select email from inhouse.users where email = "${req.body.email}"`, (err, rows, fields) => {
+        let user = inhouseDB.query(`select email from inhouse.users where email = "${req.body.email}"`, (err, rows, fields) => {
                 if (!err) {
                         /// Email exists
                         if (rows[0]) {
                                 console.log(rows[0]);
-                                mySqlConnection.query(`select id,password from inhouse.users where email = "${req.body.email}"`, (err, r, fields) => {
+                                inhouseDB.query(`select id,password from inhouse.users where email = "${req.body.email}"`, (err, r, fields) => {
                                         if (r[0]) {
                                                 bcrypt.compare(req.body.password, r[0].password, function (err, isMatch) {
                                                         if (err) throw err;
@@ -124,3 +100,27 @@ function ValidateEmail(mail) {
 }
 
 module.exports = Router;
+
+
+// Router.get("/products", (req,res) => {
+//    inhouseDB.query("select * from supermarket.product limit 10;", (err,rows,fields)=> {
+//         if(!err) {
+//             res.send(rows);
+
+//         } else {
+//             console.log(err);
+//         }
+//    });
+
+// });
+
+// Router.get("/categories", (req,res) => {
+//     inhouseDB.query("select * from supermarket.category;", (err,rows,fields)=> {
+//          if(!err) {
+//              res.send(rows);
+//          } else {
+//              console.log(err);
+//          }
+//     });
+
+//  });

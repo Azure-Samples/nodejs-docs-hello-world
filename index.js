@@ -14,7 +14,7 @@
 
 const express = require('express');
 const bodyParser = require('body-parser');
-const AuthRouters = require("./routers/eveything");
+const AuthRouters = require("./routers/auth");
 const MobileAppRouters = require("./routers/eveything");
 let app = express();
 

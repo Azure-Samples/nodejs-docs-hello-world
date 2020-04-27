@@ -1,0 +1,12 @@
+GET http://localhost:3002/products
+
+
+###
+POST http://localhost:3002/register
+Content-Type: application/json
+
+{
+    "name" : "Marc Dane",
+    "email" : "test@gmail.com",
+    "password" : "thisispassword"
+}
