@@ -9,6 +9,6 @@ RUN npm install -g n
 RUN n stable
 
 ADD . . 
-RUN npm -i
+RUN npm install
 
 EXPOSE 1337
