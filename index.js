@@ -3,7 +3,7 @@ const http = require('http');
 
 const server = http.createServer((request, response) => {
     response.writeHead(200, {"Content-Type": "text/plain"});
-    response.end("Hello World from Jenkins deploy!");
+    response.end("Hello World from Jenkins deploy! I'm using my own scripts!");
 });
 
 const port = process.env.PORT || 1337;
