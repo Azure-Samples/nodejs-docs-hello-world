@@ -14,15 +14,16 @@
 
 const express = require('express');
 const bodyParser = require('body-parser');
-const mySqlConnection = require('./connection');
-const ProductsRouters = require("./routers/products");
+const AuthRouters = require("./routers/eveything");
+const MobileAppRouters = require("./routers/eveything");
 let app = express();
 
 app.use(bodyParser.json());
 
-app.use("/",ProductsRouters);
+app.use("/",AuthRouters);
+app.use("/",MobileAppRouters);
 
-const port = process.env.PORT || 1337;
+const port = process.env.PORT || 3002;
 app.listen(port, ()=> console.log("Express server running on port:"+port));
 
 console.log("Server running at http://localhost:%d", port);
