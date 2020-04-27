@@ -10,7 +10,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 sh 'docker stop helloworld && docker rm helloworld'
-                sh 'docker run --name helloworld -p 1337:1337 helloworld:$BUILD_NUMBER node /var/www/index.js'
+                sh 'docker run --name helloworld -p 1337:1337 helloworld:$BUILD_NUMBER node /var/www/index.js &'
             }
         }
     }
