@@ -8,7 +8,7 @@
 // const port = process.env.PORT || 1337;
 // server.listen(port);
 
-    // console.log("Server running at http://localhost:%d", port);
+// console.log("Server running at http://localhost:%d", port);
 
 
 
@@ -16,14 +16,16 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const AuthRouters = require("./routers/eveything");
 const MobileAppRouters = require("./routers/eveything");
+const RecipeAppRouters = require("./routers/recipe");
 let app = express();
 
 app.use(bodyParser.json());
 
-app.use("/",AuthRouters);
-app.use("/",MobileAppRouters);
+app.use("/", AuthRouters);
+app.use("/", MobileAppRouters);
+app.use("/", RecipeAppRouters);
 
 const port = process.env.PORT || 3002;
-app.listen(port, ()=> console.log("Express server running on port:"+port));
+app.listen(port, () => console.log("Express server running on port:" + port));
 
 console.log("Server running at http://localhost:%d", port);

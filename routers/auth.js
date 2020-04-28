@@ -6,28 +6,7 @@ const jwt = require('jsonwebtoken');
 
 
 let secret = "secret"
-// Router.get("/products", (req,res) => {
-//    mySqlConnection.query("select * from supermarket.product limit 10;", (err,rows,fields)=> {
-//         if(!err) {
-//             res.send(rows);
 
-//         } else {
-//             console.log(err);
-//         }
-//    });
-
-// });
-
-// Router.get("/categories", (req,res) => {
-//     mySqlConnection.query("select * from supermarket.category;", (err,rows,fields)=> {
-//          if(!err) {
-//              res.send(rows);
-//          } else {
-//              console.log(err);
-//          }
-//     });
-
-//  });
 
 
 
@@ -84,7 +63,9 @@ Router.post('/login', async (req, res) => {
                                                 bcrypt.compare(req.body.password, r[0].password, function (err, isMatch) {
                                                         if (err) throw err;
                                                         if (isMatch) {
-                                                                const token = jwt.sign({ id: r[0].id }, secret);
+                                                                const token = jwt.sign({
+                                                                        id: r[0].id
+                                                                }, secret);
                                                                 res.header('auth-token').send(token);
                                                         } else {
                                                                 res.status(400).send("Password is not corrent");
@@ -99,23 +80,6 @@ Router.post('/login', async (req, res) => {
                         res.status(500).send("Ultra fail");
                 }
         });
-
-        //res.status(200).send("ITs ok");
-        //return res.status.send("test");
-        // if (user == null) {
-        //         return res.status.send("Cannot find user");
-        // }
-        // try {
-        //         if (await bcrypt.compare(req.body.password, user.password)) {
-        //                 res.status(200).send('Succes');
-        //         } else {
-        //                 res.status(200).send('Not allowed');
-        //         }
-        // } catch {
-        //         res.status(500).send();
-        // }
-
-
 });
 
 
