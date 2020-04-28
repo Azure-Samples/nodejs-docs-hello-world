@@ -4,8 +4,6 @@ const bcrypt = require('bcrypt')
 const inhouseDB = require("../config/inhouseDBConnection")
 const jwt = require('jsonwebtoken')
 
-let secret = "secret"
-
 Router.post('/register', async (req, res) => {
         if (!req.body.name){
                 return res.status(400).send("Name missing")
@@ -63,7 +61,7 @@ Router.post('/login', async (req, res) => {
         if (!req.body.password){
                 return res.status(400).send("Password missing")
         }
-        
+
         let email = req.body.email
         let password = req.body.password
 

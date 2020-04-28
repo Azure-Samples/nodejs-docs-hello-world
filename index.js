@@ -11,6 +11,8 @@
     // console.log("Server running at http://localhost:%d", port);
 
 
+const dotenv = require('dotenv');
+dotenv.config();
 
 const express = require('express');
 const bodyParser = require('body-parser');
