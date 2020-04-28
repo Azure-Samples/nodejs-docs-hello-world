@@ -76,8 +76,9 @@ Router.post('/login', async (req, res) => {
                                         }
 
                                         if (isMatch) {
-                                                //TODO Send JWT Token
-                                                return res.status(200).send("OK")
+                                                const user = { id: rows[0].id, email: rows[0].email}
+                                                const token = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET)
+                                                return res.json({ accessToken: token})
                                         } else {
                                                 return res.status(400).send("Password is not correct")
                                         }
