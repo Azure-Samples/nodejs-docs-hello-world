@@ -1,7 +1,12 @@
+### Supermarket /products
 GET http://localhost:3002/products
 
 
-###
+### Supermarket /categories
+GET http://localhost:3002/categories
+
+
+### Auth /register
 POST http://localhost:3002/register
 Content-Type: application/json
 
@@ -12,7 +17,7 @@ Content-Type: application/json
 }
 
 
-###
+### Auth /login
 POST http://localhost:3002/login
 Content-Type: application/json
 
@@ -22,6 +27,10 @@ Content-Type: application/json
 }
 
 
-###
-GET http://localhost:3002/test
+### InHouse /testVerify
+GET http://localhost:3002/testVerify
 Authorization: Bearer <accesToken>
+
+
+### InHouse /testNoVerify
+GET http://localhost:3002/testNoVerify
