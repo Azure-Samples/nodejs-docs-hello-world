@@ -10,11 +10,11 @@ module.exports = function authenticateToken(req,res,next) {
         jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
             if(err) return res.status(403).send("Invalid Token. Access Denied")
 
-            //{req.user.id, req.user.email}
+            //{req.user.id}
             req.user = user
             next()
         })
     } catch(err) {
-        res.status(403).send('Invalid Token. Access Denied')
+        return res.status(403).send('Invalid Token. Access Denied')
     }
 }

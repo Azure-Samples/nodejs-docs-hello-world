@@ -76,7 +76,7 @@ Router.post('/login', async (req, res) => {
                                         }
 
                                         if (isMatch) {
-                                                const user = { id: rows[0].id, email: rows[0].email}
+                                                const user = { id: rows[0].id}
                                                 const token = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET)
                                                 return res.json({ accessToken: token})
                                         } else {
