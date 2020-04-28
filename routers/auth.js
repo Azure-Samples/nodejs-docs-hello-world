@@ -1,49 +1,48 @@
-const express = require("express");
-const Router = express.Router();
-const bcrypt = require('bcrypt');
-const inhouseDB = require("../config/inhouseDBConnection");
-const jwt = require('jsonwebtoken');
-
+const express = require("express")
+const Router = express.Router()
+const bcrypt = require('bcrypt')
+const inhouseDB = require("../config/inhouseDBConnection")
+const jwt = require('jsonwebtoken')
 
 let secret = "secret"
 
 Router.post('/register', async (req, res) => {
-        let name = req.body.name;
-        let email = req.body.email;
+        let name = req.body.name
+        let email = req.body.email
         let password = req.body.password
         if (ValidateEmail(email)) {
                 
-                let hashedPassword = await bcrypt.hash(password, 10);
+                let hashedPassword = await bcrypt.hash(password, 10)
 
-                console.log("/register....Email is valid");
-                console.log("/register....Password: " + password);
-                console.log("/register....HashedPassword: " + hashedPassword);
+                console.log("/register....Email is valid")
+                console.log("/register....Password: " + password)
+                console.log("/register....HashedPassword: " + hashedPassword)
 
                 inhouseDB.query(`select * from inhouse.user where email = "${email}"`, (err, rows, fields) => {
                         if (!err) {
                                 if (rows[0]) {
-                                        return res.status(400).send("The email already exists");
+                                        return res.status(400).send("The email already exists")
                                 } else {
                                         ///Create account
                                         inhouseDB.query(
                                                 `INSERT INTO inhouse.user (name, email, password) VALUES ("${name}","${email}","${hashedPassword}")`, (err, rows, fields) => {
                                                         if (!err) {
-                                                                console.log("/register....Succesfull");
-                                                                return res.status(201).send("Account has been created");
+                                                                console.log("/register....Succesfull")
+                                                                return res.status(201).send("Account has been created")
                                                         } else {
-                                                                console.log("/register....DB_INSERT-error: " + err);
+                                                                console.log("/register....DB_INSERT-error: " + err)
                                                                 return res.status(500).send("Internal Server Error")
                                                         }
                                                 })
                                 }
                         } else {
-                                console.log("/register....DB_SELECT-error: " + err);
+                                console.log("/register....DB_SELECT-error: " + err)
                                 return res.status(500).send("Internal Server Error")
                         }
-                });
+                })
         } else {
-                console.log("/register....Email is not valid");
-                return res.status(400).send("The email is not valid");
+                console.log("/register....Email is not valid")
+                return res.status(400).send("The email is not valid")
         }
 })
 
@@ -66,7 +65,7 @@ Router.post('/login', async (req, res) => {
                                                 //TODO Send JWT Token
                                                 res.status(200).send("OK")
                                         } else {
-                                                res.status(400).send("Password is not correct");
+                                                res.status(400).send("Password is not correct")
                                         }
                                 })
                         } else {
@@ -122,31 +121,7 @@ Router.post('/login', async (req, res) => {
 
 
 function ValidateEmail(mail) {
-        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(mail);
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(mail)
 }
 
-module.exports = Router;
-
-
-// Router.get("/products", (req,res) => {
-//    inhouseDB.query("select * from supermarket.product limit 10;", (err,rows,fields)=> {
-//         if(!err) {
-//             res.send(rows);
-
-//         } else {
-//             console.log(err);
-//         }
-//    });
-
-// });
-
-// Router.get("/categories", (req,res) => {
-//     inhouseDB.query("select * from supermarket.category;", (err,rows,fields)=> {
-//          if(!err) {
-//              res.send(rows);
-//          } else {
-//              console.log(err);
-//          }
-//     });
-
-//  });
+module.exports = Router
