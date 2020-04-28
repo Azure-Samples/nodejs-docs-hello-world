@@ -20,3 +20,8 @@ Content-Type: application/json
     "email" : "test@gmail.com",
     "password" : "thisispassword"
 }
+
+
+###
+GET http://localhost:3002/test
+Authorization: Bearer <accesToken>

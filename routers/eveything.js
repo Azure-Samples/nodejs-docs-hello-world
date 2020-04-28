@@ -1,10 +1,10 @@
 const router = require("express").Router();
-const verify = require("./verifyToken");
+const verifyToken = require("./verifyToken");
 const databaseForMobile = require("../config/inhouseDBConnection");
 const databaseForWebShop = require("../config/supermarketDBConnection");
 
-router.get('/test',verify,(req,res)=> {
-    res.status(200).send("works");
+router.get('/test', verifyToken, (req,res)=> {
+    res.json(req.user);
 })
 
 
