@@ -25,7 +25,7 @@ app.use("/", AuthRouters);
 app.use("/", MobileAppRouters);
 app.use("/", RecipeAppRouters);
 
-const port = process.env.PORT || 3002;
+const port = process.env.PORT || 1337;
 app.listen(port, () => console.log("Express server running on port:" + port));
 
 console.log("Server running at http://localhost:%d", port);
