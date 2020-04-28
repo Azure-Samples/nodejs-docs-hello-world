@@ -49,33 +49,61 @@ Router.post('/register', async (req, res) => {
 
 
 Router.post('/login', async (req, res) => {
+        let email = req.body.email
+        let password = req.body.password
 
-        let user = inhouseDB.query(`select email from inhouse.users where email = "${req.body.email}"`, (err, rows, fields) => {
+        inhouseDB.query(`select id,email,password from inhouse.user where email = "${email}"`, (err, rows, fields) => {
                 if (!err) {
-                        /// Email exists
                         if (rows[0]) {
-                                console.log(rows[0]);
-                                inhouseDB.query(`select id,password from inhouse.users where email = "${req.body.email}"`, (err, r, fields) => {
-                                        if (r[0]) {
-                                                bcrypt.compare(req.body.password, r[0].password, function (err, isMatch) {
-                                                        if (err) throw err;
-                                                        if (isMatch) {
-                                                                const token = jwt.sign({ id: r[0].id }, secret);
-                                                                res.header('auth-token').send(token);
-                                                        } else {
-                                                                res.status(400).send("Password is not corrent");
-                                                        }
-
-                                                });
-
+                                //Email exists
+                                bcrypt.compare(password, rows[0].password, function (err, isMatch) {
+                                        if (err) {
+                                                console.log("/login....bcrypt-Error: " + err)
+                                                res.status(500).send("Internal Server Error")
                                         }
-                                });
-                        }
-                } else {
-                        res.status(500).send("Ultra fail");
-                }
-        });
 
+                                        if (isMatch) {
+                                                //TODO Send JWT Token
+                                                res.status(200).send("OK")
+                                        } else {
+                                                res.status(400).send("Password is not correct");
+                                        }
+                                })
+                        } else {
+                                //Email does not exist
+                                res.status(400).send("The email does not exist")
+                        }
+
+                } else {
+                        console.log("/login....DB_SELECT-error: " + err)
+                        res.status(500).send("Internal Server Error")
+                }
+        })
+        // let user = inhouseDB.query(`select email from inhouse.users where email = "${req.body.email}"`, (err, rows, fields) => {
+        //         if (!err) {
+        //                 /// Email exists
+        //                 if (rows[0]) {
+        //                         console.log(rows[0]);
+        //                         inhouseDB.query(`select id,password from inhouse.users where email = "${req.body.email}"`, (err, r, fields) => {
+        //                                 if (r[0]) {
+        //                                         bcrypt.compare(req.body.password, r[0].password, function (err, isMatch) {
+        //                                                 if (err) throw err;
+        //                                                 if (isMatch) {
+        //                                                         const token = jwt.sign({ id: r[0].id }, secret);
+        //                                                         res.header('auth-token').send(token);
+        //                                                 } else {
+        //                                                         res.status(400).send("Password is not corrent");
+        //                                                 }
+
+        //                                         });
+
+        //                                 }
+        //                         });
+        //                 }
+        //         } else {
+        //                 res.status(500).send("Ultra fail");
+        //         }
+        // });
         //res.status(200).send("ITs ok");
         //return res.status.send("test");
         // if (user == null) {
@@ -90,9 +118,7 @@ Router.post('/login', async (req, res) => {
         // } catch {
         //         res.status(500).send();
         // }
-
-
-});
+})
 
 
 function ValidateEmail(mail) {

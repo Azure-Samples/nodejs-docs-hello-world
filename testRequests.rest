@@ -6,7 +6,17 @@ POST http://localhost:3002/register
 Content-Type: application/json
 
 {
-    "name" : "Marc Dane",
+    "name" : "Bob Stevenson",
+    "email" : "test@gmail.com",
+    "password" : "thisispassword"
+}
+
+
+###
+POST http://localhost:3002/login
+Content-Type: application/json
+
+{
     "email" : "test@gmail.com",
     "password" : "thisispassword"
 }
