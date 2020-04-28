@@ -24,14 +24,14 @@ Router.post('/register', async (req, res) => {
         if (ValidateEmail(email)) {                
                 let hashedPassword = await bcrypt.hash(password, 10)
 
-                inhouseDB.query(`select * from inhouse.user where email = "${email}"`, (err, rows, fields) => {
+                inhouseDB.query(`select * from inhouse.users where user_email = "${email}"`, (err, rows, fields) => {
                         if (!err) {
                                 if (rows[0]) {
                                         return res.status(400).send("Email already exists")
                                 } else {
                                         ///Create account
                                         inhouseDB.query(
-                                                `INSERT INTO inhouse.user (name, email, password) VALUES ("${name}","${email}","${hashedPassword}")`, (err, rows, fields) => {
+                                                `INSERT INTO inhouse.users (user_name, user_email, user_password) VALUES ("${name}","${email}","${hashedPassword}")`, (err, rows, fields) => {
                                                         if (!err) {
                                                                 console.log("/register....Succesfull")
                                                                 return res.status(201).send("Account has been created")
@@ -65,18 +65,18 @@ Router.post('/login', async (req, res) => {
         let email = req.body.email
         let password = req.body.password
 
-        inhouseDB.query(`select id,email,password from inhouse.user where email = "${email}"`, (err, rows, fields) => {
+        inhouseDB.query(`select user_id, user_email, user_password from inhouse.users where user_email = "${email}"`, (err, rows, fields) => {
                 if (!err) {
                         if (rows[0]) {
                                 //Email exists
-                                bcrypt.compare(password, rows[0].password, function (err, isMatch) {
+                                bcrypt.compare(password, rows[0].user_password, function (err, isMatch) {
                                         if (err) {
                                                 console.log("/login....bcrypt-Error: " + err)
                                                 return res.status(500).send("Internal Server Error")
                                         }
 
                                         if (isMatch) {
-                                                const user = { id: rows[0].id}
+                                                const user = { id: rows[0].user_id}
                                                 const token = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET)
                                                 return res.json({ accessToken: token})
                                         } else {
