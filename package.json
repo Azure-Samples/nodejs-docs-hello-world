@@ -6,7 +6,7 @@
     "license": "MIT",
     "author": "Microsoft",
     "scripts": {
-        "start": "nodemon index.js"
+        "start": "node index.js"
     },
     "dependencies": {
         "bcrypt": "^4.0.1",
