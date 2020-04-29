@@ -1,7 +1,7 @@
-//Get .env file
-const dotenv = require('dotenv')
-dotenv.config()
-
+if (process.env.NODE_ENV !== 'production') {
+    const dotenv = require('dotenv')
+    dotenv.config()
+}
 const express = require('express')
 const bodyParser = require('body-parser')
 const AuthRouters = require("./routers/auth")
@@ -9,6 +9,7 @@ const InHouseRouters = require("./routers/inhouse")
 const HouseAppRouters = require("./routers/house")
 const RecipeAppRouters = require("./routers/recipe")
 const SuperMarketRouters = require("./routers/supermarket")
+
 let app = express()
 
 app.use(bodyParser.json())
