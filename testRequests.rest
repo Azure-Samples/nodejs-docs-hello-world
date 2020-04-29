@@ -27,9 +27,20 @@ Content-Type: application/json
 }
 
 
+### House /createhouse
+POST http://localhost:3002/createhouse
+Authorization: Bearer <accessToken>
+Content-Type: application/json
+
+{
+    "house_name" : "Cool Pals ONLY",
+    "house_address" : "Rachelsmolen 1, 5612 MA Eindhoven"
+}
+
+
 ### InHouse /testVerify
 GET http://localhost:3002/testVerify
-Authorization: Bearer <accesToken>
+Authorization: Bearer <accessToken>
 
 
 ### InHouse /testNoVerify
