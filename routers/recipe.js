@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const databaseForMobile = require("../config/database");
+const databaseForMobile = require("../config/inhouseDBConnection");
 
 
 

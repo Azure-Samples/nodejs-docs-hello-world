@@ -6,18 +6,20 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const AuthRouters = require("./routers/auth")
 const InHouseRouters = require("./routers/inhouse")
-const HouseRouters = require("./routers/house")
+const HouseAppRouters = require("./routers/house")
+const RecipeAppRouters = require("./routers/recipe")
 const SuperMarketRouters = require("./routers/supermarket")
 let app = express()
 
 app.use(bodyParser.json())
 
 app.use("/", AuthRouters)
-app.use("/", InHouseRouters)
 app.use("/", SuperMarketRouters)
-app.use("/", HouseRouters)
+app.use("/", InHouseRouters)
+app.use("/", RecipeAppRouters)
+app.use("/", HouseAppRouters)
 
-const port = process.env.PORT || 3002
-app.listen(port, ()=> console.log("Express server running on port:"+port))
+const port = process.env.PORT || 1337
+app.listen(port, () => console.log("Express server running on port:" + port))
 
 console.log("Server running at http://localhost:%d", port)

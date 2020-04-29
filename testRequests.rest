@@ -1,13 +1,13 @@
 ### Supermarket /products
-GET http://localhost:3002/products
+GET http://localhost:1337/products
 
 
 ### Supermarket /categories
-GET http://localhost:3002/categories
+GET http://localhost:1337/categories
 
 
 ### Auth /register
-POST http://localhost:3002/register
+POST http://localhost:1337/register
 Content-Type: application/json
 
 {
@@ -18,7 +18,7 @@ Content-Type: application/json
 
 
 ### Auth /login
-POST http://localhost:3002/login
+POST http://localhost:1337/login
 Content-Type: application/json
 
 {
@@ -28,7 +28,7 @@ Content-Type: application/json
 
 
 ### House /createhouse
-POST http://localhost:3002/createhouse
+POST http://localhost:1337/createhouse
 Authorization: Bearer <accessToken>
 Content-Type: application/json
 
@@ -39,9 +39,9 @@ Content-Type: application/json
 
 
 ### InHouse /testVerify
-GET http://localhost:3002/testVerify
+GET http://localhost:1337/testVerify
 Authorization: Bearer <accessToken>
 
 
 ### InHouse /testNoVerify
-GET http://localhost:3002/testNoVerify
+GET http://localhost:1337/testNoVerify
