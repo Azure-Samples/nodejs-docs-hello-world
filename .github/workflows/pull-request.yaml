@@ -1,0 +1,23 @@
+name: Pull Request Workflow
+
+on:
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  build-image:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+
+    - name: Build docker image
+      run: |
+        docker build -f ${{ github.workspace }}/dockerfile -t nodejs-hello-world:${{ github.sha }} .
+
+    - name: Scan container image
+      uses: Azure/container-scan@v0
+      with:
+        image-name: nodejs-hello-world:${{ github.sha }}
+        severity-threshold: CRITICAL
+        run-quality-checks: false

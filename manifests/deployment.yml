@@ -1,0 +1,16 @@
+apiVersion : apps/v1beta1
+kind: Deployment
+metadata:
+  name: "hello-world"
+spec:
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: "hello-world"
+    spec:
+      containers:
+        - name: "hello-world"
+          image: "amitpuri.azurecr.io/nodejs-hello-world"
+          ports:
+          - containerPort: 1337
