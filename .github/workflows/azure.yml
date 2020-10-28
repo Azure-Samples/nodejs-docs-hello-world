@@ -1,5 +1,5 @@
 # This workflow will build and push a node.js application to an Azure Web App when a release is created.
-#
+# check
 # This workflow assumes you have already created the target Azure App Service web app.
 # For instructions see https://docs.microsoft.com/azure/app-service/app-service-plan-manage#create-an-app-service-plan
 #
