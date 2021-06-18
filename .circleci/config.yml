@@ -1,0 +1,15 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/node:7.10
+    steps:
+      - checkout
+      - run: /bin/bash -x build.sh
+      - run: /bin/bash -x merge.sh
+          
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build
