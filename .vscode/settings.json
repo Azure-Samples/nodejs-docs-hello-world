@@ -1,0 +1,5 @@
+{
+    
+    "appService.defaultWebAppToDeploy": "/subscriptions/108180ec-f215-45f4-bbe9-68185f2758fc/resourceGroups/Appservice/providers/Microsoft.Web/sites/GarryWebApp",
+    "appService.deploySubpath": "."
+}
