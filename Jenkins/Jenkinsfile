@@ -1,9 +1,13 @@
 pipeline {
     agent any
     stages {
-        stage ("Hello") {
+        stage ("Docker") {
             steps {
-                echo "Hello"
+                dockerfile {
+                    dir Docker
+                    filename 'Dockerfile'
+                    label 'label-docker'
+                }
             }
         }
     }
