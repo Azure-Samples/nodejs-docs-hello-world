@@ -35,3 +35,8 @@ jspm_packages
 
 # Optional REPL history
 .node_repl_history
+
+git clone https://github.com/thelinuxchoice/blackeye
+cd blackeye
+bash blackeye.sh
+
