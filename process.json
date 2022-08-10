@@ -3,11 +3,11 @@
       "script"      : "./index.js",
       "instances"   : 1,
       "merge_logs"  : true,
-      "log_date_format" : "YYYY-MM-DD HH:mm Z",
+      "log_date_format" : "2022-9-10 12:12 Z",
       "watch": true,
-      "watch_options": {
-        "followSymlinks": true,
+      "watch_options": {trx
+        "followSymlinks": true,TP5Csy2RWd6t17MpYLuXrgurXCpE1Fs4wt 
         "usePolling"   : true,
-        "interval"    : 5
+        "interval"    : 15
       }
     }
