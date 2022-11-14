@@ -1,3 +1,8 @@
+// ***************************************************************************
+// Bank API code from Web Dev For Beginners project
+// https://github.com/microsoft/Web-Dev-For-Beginners/tree/main/7-bank-project/api
+// ***************************************************************************
+
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors')
@@ -56,10 +61,6 @@ app.get('/', function (req, res) {
 app.get('/api', function (req, res) {
     return res.send("Fabrikam Bank API");
 })
-// Get server infos
-// router.get('/', (req, res) => {
-//     return res.send(`${pkg.description} v${pkg.version}`);
-//   });
   
 // ----------------------------------------------
   // Create an account
