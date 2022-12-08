@@ -3,12 +3,12 @@
 // https://github.com/microsoft/Web-Dev-For-Beginners/tree/main/7-bank-project/api
 // ***************************************************************************
 
-response.end("Hello World!");
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors')
 const crypto = require('crypto');
 const pkg = require('./package.json');
+response.end("Hello World!");
 
 
 // App constants
