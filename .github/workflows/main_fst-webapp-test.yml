@@ -4,8 +4,6 @@ on:
   push:
     branches:
       - "main"
-    paths:
-      - "!.github/workflows/**"
 
 concurrency:
   group: "main_${{ github.head_ref }}-backoffice-cd"
