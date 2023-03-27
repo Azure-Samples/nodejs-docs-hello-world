@@ -1,0 +1,62 @@
+name: Backoffice Main Compile, Docker build and Azure deploy
+
+on:
+  push:
+    branches:
+      - "main"
+    paths:
+      - "!.github/workflows/**"
+
+concurrency:
+  group: "main_${{ github.head_ref }}-backoffice-cd"
+  cancel-in-progress: true
+
+jobs:
+  yarn-build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          cache: yarn
+      - name: Build
+        run: |
+          yarn install
+          export NODE_OPTIONS=--max_old_space_size=4096
+          yarn build --filter=@eligo/admin-client
+
+  audodeploy-main-on-dev:
+    runs-on: ubuntu-latest
+    needs: yarn-build
+    environment:
+      name: "dev"
+
+    steps:
+      - name: Checkout to the Branch
+        uses: actions/checkout@v3
+
+      - name: Set up Docker Build
+        uses: docker/setup-buildx-action@v1
+
+      - name: Log in to registry
+        uses: docker/login-action@v2
+        with:
+          registry: https://eligonext.azurecr.io/
+          username: ${{ secrets.CONTAINER_REGISTRY_USERNAME }}
+          password: ${{ secrets.CONTAINER_REGISTRY_PASSWORD }}
+
+      - name: Build and push image to registry
+        uses: docker/build-push-action@v3
+        with:
+          push: true
+          tags: eligonext.azurecr.io/eligonext/backoffice-client:dev
+          file: ./apps/eligo-admin-client/Dockerfile
+    
+      - name: Deploy to Azure Dev resource group
+        id: deploy-to-dev
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: "fst-webapp-test"
+          publish-profile: ${{ secrets.PUBLISH_PROFILE }}
+          images: "eligonext.azurecr.io/eligonext/backoffice-client:dev"
