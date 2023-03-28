@@ -17,11 +17,10 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
-          cache: yarn
+          cache: npm
       - name: Build
         run: |
-          yarn install
-          export NODE_OPTIONS=--max_old_space_size=4096
+          npm install
           yarn build --filter=@eligo/admin-client
 
   audodeploy-main-on-dev:
@@ -48,13 +47,13 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           push: true
-          tags: eligonext.azurecr.io/eligonext/backoffice-client:dev
-          file: ./apps/eligo-admin-client/Dockerfile
+          tags: fsttest.azurecr.io/eligonext/hello-world:fst
+          file: ./Dockerfile
     
       - name: Deploy to Azure Dev resource group
         id: deploy-to-dev
         uses: azure/webapps-deploy@v2
         with:
           app-name: "fst-webapp-test"
-          publish-profile: ${{ secrets.PUBLISH_PROFILE }}
-          images: "eligonext.azurecr.io/eligonext/backoffice-client:dev"
+          publish-profile: ${{ secrets. }}
+          images: "fsttest.azurecr.io/eligonext/hello-world:fst"
