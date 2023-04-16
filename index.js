@@ -45,7 +45,21 @@ const db = {
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(cors({ origin: /http:\/\/(127(\.\d){3}|localhost)/}));
+
+// ----------------------------------------------------
+const whiteList = [/http:\/\/(127(\.\d){3}|localhost)/];
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (!origin || whiteList.some(regexp => regexp.test(origin))) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+};
+
+app.use(cors(corsOptions));
+// ----------------------------------------------------
 app.options('*', cors());
 
 // ***************************************************************************
