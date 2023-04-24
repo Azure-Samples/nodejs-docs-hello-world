@@ -1,0 +1,31 @@
+name: CI/CD nodejs image
+
+on:
+  push:
+    branches:
+      - "main"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Login to Docker Hub
+        run: docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_SECRET }}
+
+      - name: Build the Docker image
+        run: docker build --tag ${{ secrets.DOCKER_USER }}/${{ secrets.DOCKER_IMAGE_NAME }}:${{ github.sha }} .
+
+      - name: Set image id from the last build
+        id: vars
+        run: echo "::set-output name=image_id::$(docker images | grep ${{ secrets.DOCKER_USER }}\/${{ secrets.DOCKER_IMAGE_NAME }} | head -n1 | awk '{print $3}')"
+      
+      - name: Retag image LATEST with image id from the last build
+        run: docker tag ${{ steps.vars.outputs.image_id }} ${{ secrets.DOCKER_USER }}/${{ secrets.DOCKER_IMAGE_NAME }}:latest
+
+      - name: Docker Push
+        run: |
+          docker push ${{ secrets.DOCKER_USER }}/${{ secrets.DOCKER_IMAGE_NAME }}:${{ github.sha }}
+          docker push ${{ secrets.DOCKER_USER }}/${{ secrets.DOCKER_IMAGE_NAME }}:latest
