@@ -55,24 +55,7 @@ const router = express.Router();
 
 // Hello World for index page
 app.get('/', function (req, res) {
-    //return res.send("Hello World!");
-    function formatName(user) {
-      return user.firstName + ' ' + user.lastName;
-    }
-    
-    const user = {
-      firstName: 'John',
-      lastName: 'Tropiano'
-    };
-    
-    const element = (
-      <h1>
-        Hello, {formatName(user)}!
-      </h1>
-    );
-    
-    const root = ReactDOM.createRoot(document.getElementById('root'));
-    return res.send({element});
+    return res.send("Hello World!");
 })
 
 app.get('/api', function (req, res) {
