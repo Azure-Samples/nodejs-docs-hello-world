@@ -59,7 +59,7 @@ app.get('/', function (req, res) {
 })
 
 app.get('/api', function (req, res) {
-    return res.send("Fabrikam Bank API");
+    return res.send("Ripon Banik Bank API");
 })
   
 // ----------------------------------------------
