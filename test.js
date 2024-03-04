@@ -1,3 +1,3 @@
-function test_github() {
-    console.log("hello world");
+function testfunction() {
+    alert("helo");
 }
