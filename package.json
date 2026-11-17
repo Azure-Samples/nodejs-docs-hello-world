@@ -7,6 +7,7 @@
     "author": "Microsoft",
     "scripts": {
         "start": "node index.js",
+        "build": "node --check index.js",
         "lint": "eslint",
         "format": "prettier --single-quote --write *.js",
         "test": "mocha --reporter mocha-junit-reporter --reporter-options mochaFile=test-results/test-results.xml"
