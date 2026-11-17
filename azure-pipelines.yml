@@ -1,4 +1,3 @@
-
 trigger:
   branches:
     include:
@@ -24,8 +23,19 @@ steps:
       npm --version
     displayName: 'Check Node.js and npm'
 
-  - script: npm ci
+  - script: npm ci --ignore-scripts --dry-run
     displayName: 'Install dependencies'
 
   - script: npm run lint --if-present
     displayName: 'Run code quality checks'
+
+  - script: npm test
+    displayName: 'Run tests'
+
+  - task: PublishTestResults@2
+    displayName: 'Publish test results'
+    condition: succeededOrFailed()
+    inputs:
+      testResultsFormat: JUnit
+      testResultsFiles: 'test-results/test-results.xml'
+      failTaskOnFailedTests: true
