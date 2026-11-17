@@ -1,0 +1,37 @@
+
+# LAB 1 - First Azure DevOps CI Pipeline
+
+trigger:
+  branches:
+    include:
+      - main
+
+pr:
+  - main
+
+pool:
+  vmImage: ubuntu-latest
+
+variables:
+  nodeVersion: '20.x'
+
+steps:
+  # Step 1: Install Node.js
+  - task: UseNode@1
+    displayName: 'Install Node.js'
+    inputs:
+      version: $(nodeVersion)
+
+  # Step 2: Verify Node and npm
+  - script: |
+      node --version
+      npm --version
+    displayName: 'Check Node.js and npm'
+
+  # Step 3: Install application dependencies
+  - script: npm ci
+    displayName: 'Install dependencies'
+
+  # Step 4: Run lint if configured
+  - script: npm run lint --if-present
+    displayName: 'Run code quality checks'
