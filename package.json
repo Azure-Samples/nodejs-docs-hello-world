@@ -7,19 +7,23 @@
     "author": "Microsoft",
     "scripts": {
         "start": "node index.js",
+        "build": "node --check index.js",
         "lint": "eslint",
-        "format": "prettier --single-quote --write *.js"    
+        "format": "prettier --single-quote --write *.js",
+        "test": "mocha --reporter mocha-junit-reporter --reporter-options mochaFile=test-results/test-results.xml"
     },
     "devDependencies": {
         "eslint": "^7.5.0",
+        "mocha": "^10.8.2",
+        "mocha-junit-reporter": "^2.2.1",
         "prettier": "^2.0.5"
-      },
+    },
     "dependencies": {
         "body-parser": "^1.19.0",
         "cors": "^2.8.5",
         "express": "^4.17.1"
-      },
-      "engines": {
+    },
+    "engines": {
         "node": ">=10"
-      }
+    }
 }

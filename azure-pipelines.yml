@@ -1,0 +1,113 @@
+
+# ==========================================
+# LAB 3 - Build Artifacts and ZIP Packaging
+# ==========================================
+
+trigger:
+  branches:
+    include:
+      - main
+      - feature/lab3-artifacts
+
+pr:
+  - main
+
+pool:
+  vmImage: ubuntu-24.04
+
+variables:
+  nodeVersion: '22.x'
+  artifactName: 'app-drop'
+
+steps:
+
+  # 1. Checkout source code
+  - checkout: self
+    clean: true
+    displayName: 'Checkout source code'
+
+  # 2. Install Node.js
+  - task: UseNode@1
+    displayName: 'Install Node.js'
+    inputs:
+      version: $(nodeVersion)
+
+  # 3. Verify versions
+  - script: |
+      node --version
+      npm --version
+    displayName: 'Verify Node.js environment'
+
+  # 4. Install dependencies
+  - script: npm ci
+    displayName: 'Install dependencies'
+
+  # 5. Build validation
+  - script: npm run build
+    displayName: 'Build application'
+
+  # 6. Run unit tests
+  - script: npm test
+    displayName: 'Run unit tests'
+
+  # 7. Publish test results
+  - task: PublishTestResults@2
+    displayName: 'Publish test results'
+    condition: succeededOrFailed()
+    inputs:
+      testResultsFormat: 'JUnit'
+      testResultsFiles: '**/test-results.xml'
+      failTaskOnFailedTests: true
+      testRunTitle: 'Lab 3 Unit Tests'
+
+  # 8. Create deployment staging folder
+  - task: CopyFiles@2
+    displayName: 'Prepare deployment files'
+    inputs:
+      SourceFolder: '$(Build.SourcesDirectory)'
+      Contents: |
+        index.js
+        package.json
+        package-lock.json
+        lib/**
+      TargetFolder: '$(Build.ArtifactStagingDirectory)/app'
+
+  # 9. Create ZIP package
+  - task: ArchiveFiles@2
+    displayName: 'Create deployment ZIP'
+    inputs:
+      rootFolderOrFile: '$(Build.ArtifactStagingDirectory)/app'
+      includeRootFolder: false
+      archiveType: 'zip'
+      archiveFile: '$(Build.ArtifactStagingDirectory)/app.zip'
+      replaceExistingArchive: true
+
+  # 10. Publish ZIP as pipeline artifact
+  - task: PublishPipelineArtifact@1
+    displayName: 'Publish deployment artifact'
+    inputs:
+      targetPath: '$(Build.ArtifactStagingDirectory)/app.zip'
+      artifact: $(artifactName)
+      publishLocation: 'pipeline'
+
+  # 11. Download artifact from this pipeline run
+  - task: DownloadPipelineArtifact@2
+    displayName: 'Download published artifact'
+    inputs:
+      buildType: 'current'
+      artifactName: $(artifactName)
+      targetPath: '$(Pipeline.Workspace)/downloaded'
+
+  # 12. Verify downloaded ZIP
+  - script: |
+      echo "Checking downloaded artifact..."
+
+      ls -lh "$(Pipeline.Workspace)/downloaded"
+
+      test -f "$(Pipeline.Workspace)/downloaded/app.zip"
+
+      echo "ZIP contents:"
+      unzip -l "$(Pipeline.Workspace)/downloaded/app.zip"
+
+      echo "Artifact verification completed."
+    displayName: 'Verify deployment ZIP'
