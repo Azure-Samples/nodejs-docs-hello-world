@@ -8,6 +8,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors')
 const crypto = require('crypto');
 const pkg = require('./package.json');
+const { updateBalance } = require('./lib/balance');
 
 
 // App constants
@@ -54,9 +55,9 @@ app.options('*', cors());
 const router = express.Router();
 
 // Hello World for index page
-app.get('/', function (req, res) {
-    return res.send("Hello World!");
-})
+app.get('/', (req, res) => {
+    res.send('Hello! Azure DevOps Lab 1');
+});
 
 app.get('/api', function (req, res) {
     return res.send("Fabrikam Bank API");
@@ -176,7 +177,7 @@ router.delete('/accounts/:user', (req, res) => {
     account.transactions.push(transaction);
   
     // Update balance
-    account.balance += transaction.amount;
+    account.balance = updateBalance(account.balance, transaction.amount);
   
     return res.status(201).json(transaction);
   });
@@ -202,7 +203,8 @@ router.delete('/accounts/:user', (req, res) => {
     }
   
     // Remove transaction
-    account.transactions.splice(transactionIndex, 1);
+    const [transaction] = account.transactions.splice(transactionIndex, 1);
+    account.balance = updateBalance(account.balance, -transaction.amount);
   
     res.sendStatus(204);
   });
