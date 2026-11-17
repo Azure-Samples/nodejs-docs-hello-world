@@ -1,3 +1,8 @@
+
+# =========================================
+# LAB 2 - Automated Build and Testing
+# =========================================
+
 trigger:
   branches:
     include:
@@ -11,31 +16,46 @@ pool:
 
 variables:
   nodeVersion: '20.x'
+  buildConfiguration: 'Release'
 
 steps:
+
+  # 1. Checkout source code
+  - checkout: self
+    clean: true
+    displayName: 'Checkout source code'
+
+  # 2. Install Node.js
   - task: UseNode@1
     displayName: 'Install Node.js'
     inputs:
       version: $(nodeVersion)
 
+  # 3. Verify versions
   - script: |
       node --version
       npm --version
-    displayName: 'Check Node.js and npm'
+    displayName: 'Verify Node and npm'
 
-  - script: npm ci --ignore-scripts --dry-run
+  # 4. Install dependencies
+  - script: npm ci
     displayName: 'Install dependencies'
 
-  - script: npm run lint --if-present
-    displayName: 'Run code quality checks'
+  # 5. Validate application syntax
+  - script: npm run build
+    displayName: 'Build and validate application'
 
+  # 6. Execute unit tests
   - script: npm test
-    displayName: 'Run tests'
+    displayName: 'Run unit tests'
 
+  # 7. Publish test reports
   - task: PublishTestResults@2
-    displayName: 'Publish test results'
+    displayName: 'Publish unit test results'
     condition: succeededOrFailed()
     inputs:
-      testResultsFormat: JUnit
-      testResultsFiles: 'test-results/test-results.xml'
+      testResultsFormat: 'JUnit'
+      testResultsFiles: '**/test-results.xml'
+      mergeTestResults: true
       failTaskOnFailedTests: true
+      testRunTitle: 'Node.js Unit Tests'
